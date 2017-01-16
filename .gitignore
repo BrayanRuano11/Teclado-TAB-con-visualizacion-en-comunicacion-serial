@@ -1,0 +1,246 @@
+// Nombre: Brayan Ruano
+
+#include <Keypad.h>
+#include <TimerOne.h>
+int numero;
+char letra;
+int contadorp=0;
+int contador=0;
+int contador1=0;
+int contador2=0;
+int contador3=0;
+int contador4=0;
+int contador5=0;
+int contador6=0;
+int contador7=0;
+const byte ROWS = 4; //four rows
+const byte COLS = 3; //four columns
+//define the cymbols on the buttons of the keypads
+char hexaKeys[ROWS][COLS] = {
+  {'1', '2', '3'},
+  {'4', '5', '6'},
+  {'7', '8', '9'},
+  {'*', '0', '#'}
+};
+byte rowPins[ROWS] = {5, 4, 3, 2}; //connect to the row pinouts of the keypad
+byte colPins[COLS] = {8, 7, 6}; //connect to the column pinouts of the keypad
+
+//initialize an instance of class NewKeypad
+Keypad customKeypad = Keypad( makeKeymap(hexaKeys), rowPins, colPins, ROWS, COLS);
+
+void setup() {
+  // put your setup code here, to run once:
+Serial.begin(9600);
+Timer1.initialize(150000);
+Timer1.attachInterrupt(espera);
+}
+void loop() {
+  // put your main code here, to run repeatedly:
+ char customKey = customKeypad.getKey();
+  
+    if (customKey == '2') {
+      contador++;
+      letra=dis(contador);
+        if(contador==3){
+          contador = 0; 
+        }
+        contadorp=0;
+      }
+    if (customKey == '3') {
+      contador1++;
+      letra= dis1(contador1);
+        if(contador1==3){
+          contador1 = 0; 
+        }
+        contadorp = 0;
+      }
+    if (customKey == '4') {
+      contador2++;
+      letra= dis2(contador2);
+        if(contador2==3){
+          contador2 = 0; 
+        }
+        contadorp = 0;
+      }
+    if (customKey == '5') {
+      contador3++;
+      letra= dis3(contador3);
+        if(contador3==3){
+          contador3 = 0; 
+        }
+        contadorp = 0;
+      }
+    if (customKey == '6') {
+      contador4++;
+      letra= dis4(contador4);
+        if(contador4==3){
+          contador4 = 0; 
+        }
+        contadorp = 0;
+      }
+    if (customKey == '7') {
+      contador5++;
+      letra= dis5(contador5);
+        if(contador5==4){
+          contador5 = 0; 
+        }
+        contadorp = 0;
+      }
+    if (customKey == '8') {
+      contador6++;
+      letra= dis6(contador6);
+        if(contador6==3){
+          contador6 = 0; 
+        }
+        contadorp = 0;
+      }
+    if (customKey == '9') {
+      contador7++;
+      letra= dis7(contador7);
+        if(contador7==4){
+          contador7 = 0; 
+        }
+        contadorp = 0;
+      }    
+    
+  }
+char dis (int pulsos){
+  char letra;
+  switch (pulsos) {
+    case 1:
+      letra= 'a';
+      break;
+    case 2:
+      letra= 'b';
+      break;
+    case 3:
+      letra='c';
+      break;
+  }
+  return letra;
+}
+char dis1 (int pulsos){
+  char letra;
+  switch (pulsos) {
+    case 1:
+      letra= 'd';
+      break;
+    case 2:
+      letra= 'e';
+      break;
+    case 3:
+      letra='f';
+      break;
+  }
+  return letra;
+}
+char dis2 (int pulsos){
+  char letra;
+  switch (pulsos) {
+    case 1:
+      letra= 'g';
+      break;
+    case 2:
+      letra= 'h';
+      break;
+    case 3:
+      letra='i';
+      break;
+  }
+  return letra;
+}
+char dis3 (int pulsos){
+  char letra;
+  switch (pulsos) {
+    case 1:
+      letra= 'j';
+      break;
+    case 2:
+      letra= 'k';
+      break;
+    case 3:
+      letra='l';
+      break;
+  }
+  return letra;
+}
+char dis4 (int pulsos){
+  char letra;
+  switch (pulsos) {
+    case 1:
+      letra= 'm';
+      break;
+    case 2:
+      letra= 'n';
+      break;
+    case 3:
+      letra='o';
+      break;
+  }
+  return letra;
+}
+char dis5 (int pulsos){
+  char letra;
+  switch (pulsos) {
+    case 1:
+      letra= 'p';
+      break;
+    case 2:
+      letra= 'q';
+      break;
+    case 3:
+      letra='r';
+      break;
+    case 4:
+      letra='s';
+      break;
+  }
+  return letra;
+}
+char dis6 (int pulsos){
+  char letra;
+  switch (pulsos) {
+    case 1:
+      letra= 't';
+      break;
+    case 2:
+      letra= 'u';
+      break;
+    case 3:
+      letra='v';
+      break;
+  }
+  return letra;
+}
+char dis7 (int pulsos){
+  char letra;
+  switch (pulsos) {
+    case 1:
+      letra= 'w';
+      break;
+    case 2:
+      letra= 'x';
+      break;
+    case 3:
+      letra='y';
+      break;
+    case 4:
+      letra='z';
+      break;
+  }
+  return letra;
+}
+void espera() {
+  contadorp++;
+  if (contadorp == 6) {
+    Serial.print(letra);
+    contador= 0;
+    contador1= 0;
+    contador2=0;
+    contador3=0;
+    contador4=0;
+    contador5=0;
+    contador6=0;
+    contador7=0;
+  }
+}
